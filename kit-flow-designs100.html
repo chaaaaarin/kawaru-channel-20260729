@@ -1,0 +1,1392 @@
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>業務シーン別フロー設計図100選</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap" rel="stylesheet"><style>
+:root{--brand:#1C3461;--brand-deep:#16284A;--brand-soft:rgba(28,52,97,.08);--accent:#5BBCD4;--accent-deep:#2C7A93;
+--bg:#F7FAFC;--paper:#FFFFFF;--ink:#1C3461;--ink-mid:#4A6080;--line:rgba(28,52,97,.12);--head:'Noto Sans JP';}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans JP',-apple-system,'Hiragino Sans',sans-serif;line-height:1.7;}
+.wrap{max-width:960px;margin:0 auto;background:var(--paper);min-height:100vh;}
+header{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:2px solid var(--brand);padding:16px 28px;}
+header .top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+header img{width:40px;height:40px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 2px 8px rgba(0,0,0,.14);}
+header .ttl{font-family:var(--head);font-weight:900;font-size:19px;color:var(--brand-deep);line-height:1.2;}
+header .ttl small{display:block;font-size:12px;color:var(--ink-mid);font-weight:500;}
+.badge{display:inline-block;background:var(--brand);color:#fff;font-family:var(--head);font-weight:900;font-size:13px;border-radius:999px;padding:4px 14px;}
+.hbtns{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--accent);border:2px solid var(--brand);color:var(--ink);
+border-radius:999px;padding:8px 18px;font-weight:900;font-size:14px;cursor:pointer;text-decoration:none;font-family:'Noto Sans JP';}
+.btn.ghost{background:var(--paper);border:1.5px solid var(--line);color:var(--brand-deep);}
+.btn.sm{padding:6px 14px;font-size:13px;}
+main{padding:24px 28px 60px;}
+.lead{font-size:15px;color:var(--ink-mid);margin-bottom:18px;}
+h2.cat{font-family:var(--head);font-weight:900;font-size:21px;color:var(--ink);margin:30px 0 14px;padding-left:12px;border-left:5px solid var(--brand);}
+.icard{background:var(--paper);border:1.5px solid var(--line);border-left:4px solid var(--brand);border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.ititle{font-family:var(--head);font-weight:900;font-size:16.5px;color:var(--ink);margin-bottom:5px;}
+.idesc{font-size:13px;color:var(--ink-mid);margin-bottom:10px;}
+pre.prompt{background:var(--ink);color:#ECECEA;border-radius:10px;padding:14px 16px;white-space:pre-wrap;word-break:break-word;
+font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.65;max-height:260px;overflow-y:auto;margin-bottom:10px;}
+.cbtns{display:flex;gap:8px;flex-wrap:wrap;}
+.hidden{display:none!important;}
+footer{padding:26px 28px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-mid);text-align:center;}
+footer a{color:var(--brand-deep);}
+@media(max-width:600px){main{padding:18px 16px 50px;}header{padding:12px 16px;}}
+</style></head><body><div class="wrap">
+<header><div class="top">
+<img src="data:image/png;base64,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" alt="AIエージェント/Kawaru">
+<div class="ttl">業務シーン別フロー設計図100選<small>AIエージェント/Kawaru・プレゼント</small></div>
+<span class="badge">100個</span>
+<div class="hbtns"><a class="btn ghost" href="./present.html">← 一覧へ</a><button class="btn" onclick="downloadText('pfull','flow-designs100.md',this)">⬇ 全件ダウンロード</button></div>
+</div></header><main>
+<p class="lead">全100項目。各カードのボタンから個別にコピー・ダウンロードできます。上部から全件まとめてダウンロードもできます。「自然言語で作るなら」の1行は、Workspace Studioの自然言語入力欄にそのまま貼れます。</p>
+<h2 class="cat">メール管理</h2>
+<div class="icard"><div class="ititle">1. 重要人物からのメール通知</div><div class="idesc">Geminiが送信元をVIPリストと照合をきっかけに自動で進みます。</div><pre class="prompt" id="p1">トリガー: 上司や取引先などVIPリストのメールを受信したら
+処理: Geminiが送信元をVIPリストと照合 → 該当すればChatに即時通知
+変数: 送信元アドレス・件名をChatメッセージへ渡す
+自然言語で作るなら: "上司からメールが来たら、件名と要約をすぐChatで教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p1',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p1','flow-1.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">2. 未読メールの1日サマリー</div><div class="idesc">その日の未読メールを取得をきっかけに自動で進みます。</div><pre class="prompt" id="p2">トリガー: 毎日18時になったら
+処理: その日の未読メールを取得 → Geminiが要点を3行で要約 → Chatに一括通知
+変数: 未読メール本文の要約テキスト
+自然言語で作るなら: "毎日18時に、その日届いた未読メールの内容を3行で要約してChatに送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p2',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p2','flow-2.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">3. アクションアイテム付きメールにラベル</div><div class="idesc">Geminiが本文から要対応の有無を判定をきっかけに自動で進みます。</div><pre class="prompt" id="p3">トリガー: メールを受信したら
+処理: Geminiが本文から要対応の有無を判定 → 該当すれば専用ラベルを付与
+変数: 要対応フラグ(true/false)
+自然言語で作るなら: "対応が必要そうなメールに自動でラベルを付けて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p3',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p3','flow-3.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">4. 問い合わせメールの自動要約+返信案</div><div class="idesc">Geminiが内容を要約をきっかけに自動で進みます。</div><pre class="prompt" id="p4">トリガー: 問い合わせ用アドレス宛にメールが届いたら
+処理: Geminiが内容を要約 → 返信案を下書き作成
+変数: 要約テキスト・返信案テキスト
+自然言語で作るなら: "問い合わせメールが来たら、内容を要約して返信の下書きも作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p4',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p4','flow-4.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">5. 見積もり依頼メールの内容抽出</div><div class="idesc">Geminiが品目・数量・希望納期を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p5">トリガー: 見積もり関連のメールを受信したら
+処理: Geminiが品目・数量・希望納期を抽出 → スプレッドシートに1行追加
+変数: 抽出したJSON(品目/数量/納期)
+自然言語で作るなら: "見積もり依頼メールから品目・数量・納期を読み取って表に追加して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p5',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p5','flow-5.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">6. クレームメールの緊急検知+即時通知</div><div class="idesc">Geminiが苦情・クレームの可能性を判定をきっかけに自動で進みます。</div><pre class="prompt" id="p6">トリガー: メールを受信したら
+処理: Geminiが苦情・クレームの可能性を判定 → 該当すれば担当チャンネルへ即時通知
+変数: 緊急度フラグ・要約
+自然言語で作るなら: "クレームらしいメールが来たら、すぐ担当チャンネルに知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p6',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p6','flow-6.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">7. 添付ファイル付きメールの自動保存</div><div class="idesc">添付を指定のドライブフォルダへ保存をきっかけに自動で進みます。</div><pre class="prompt" id="p7">トリガー: 添付ファイル付きメールを受信したら
+処理: 添付を指定のドライブフォルダへ保存 → 保存先リンクをメール内容と紐付け
+変数: 保存先フォルダのファイルリンク
+自然言語で作るなら: "添付ファイルが付いたメールが来たら、指定フォルダに自動保存して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p7',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p7','flow-7.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">8. 定期レポートメールの数値抽出</div><div class="idesc">Geminiが本文から主要数値を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p8">トリガー: 定型フォーマットのレポートメールを受信したら
+処理: Geminiが本文から主要数値を抽出 → スプレッドシートの該当行を更新
+変数: 抽出した数値データ
+自然言語で作るなら: "毎週届くレポートメールから数字だけ抜き出して表を更新して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p8',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p8','flow-8.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">9. 未返信メールのフォローアップリマインド</div><div class="idesc">過去1週間の未返信メールを抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p9">トリガー: 毎週月曜9時になったら
+処理: 過去1週間の未返信メールを抽出 → 本人宛にリマインドをChatで送付
+変数: 未返信メールの一覧
+自然言語で作るなら: "1週間返信していないメールがあれば、月曜の朝に教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p9',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p9','flow-9.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">10. メルマガの要点だけ週次まとめ</div><div class="idesc">購読中メルマガの本文を収集をきっかけに自動で進みます。</div><pre class="prompt" id="p10">トリガー: 毎週金曜17時になったら
+処理: 購読中メルマガの本文を収集 → Geminiが要点だけ抽出してまとめ
+変数: 要点リストのテキスト
+自然言語で作るなら: "週に届いたメルマガの要点だけ、金曜にまとめて送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p10',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p10','flow-10.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">11. 社内問い合わせの一次切り分け</div><div class="idesc">Geminiが担当部署を推定をきっかけに自動で進みます。</div><pre class="prompt" id="p11">トリガー: 社内問い合わせ窓口にメールが届いたら
+処理: Geminiが担当部署を推定 → 該当部署のChatスペースへ転送
+変数: 推定担当部署名
+自然言語で作るなら: "社内問い合わせは内容を見て担当部署に振り分けて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p11',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p11','flow-11.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">12. 退職・異動連絡メールの自動アーカイブ</div><div class="idesc">対象者名を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p12">トリガー: 人事から異動・退職の連絡メールが届いたら
+処理: 対象者名を抽出 → 専用フォルダにアーカイブ保存
+変数: 対象者名・異動日
+自然言語で作るなら: "異動や退職の連絡メールは、専用フォルダに自動で整理して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p12',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p12','flow-12.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">会議・スケジュール</h2>
+<div class="icard"><div class="ititle">13. 会議後の議事録自動整形</div><div class="idesc">自動生成メモを取得をきっかけに自動で進みます。</div><pre class="prompt" id="p13">トリガー: Google Meetの会議が終わったら
+処理: 自動生成メモを取得 → Geminiが出席者・議題・決定事項の形式に整形 → Googleドキュメントとして保存
+変数: 整形済み議事録テキスト
+自然言語で作るなら: "会議が終わったら、メモを議事録の形式に整えてドキュメントにして"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p13',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p13','flow-13.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">14. 会議メモのアクションアイテムをタスク化</div><div class="idesc">Geminiがアクションアイテムをリスト抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p14">トリガー: 会議メモが完成したら
+処理: Geminiがアクションアイテムをリスト抽出 → 各項目を1件ずつタスク化(Repeat for each)
+変数: アクションアイテムのリスト
+自然言語で作るなら: "会議メモからやることリストを抜き出して、1つずつタスクにして"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p14',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p14','flow-14.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">15. 複数会議の要点を1通のダイジェストに</div><div class="idesc">その日の全会議メモを収集をきっかけに自動で進みます。</div><pre class="prompt" id="p15">トリガー: 毎日18時になったら
+処理: その日の全会議メモを収集 → Geminiが横断的に要点を整理
+変数: 当日の会議要点まとめ
+自然言語で作るなら: "今日あった会議の要点を1通にまとめて送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p15',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p15','flow-15.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">16. 予定調整メールから空き時間を提案</div><div class="idesc">カレンダーの空き状況を確認をきっかけに自動で進みます。</div><pre class="prompt" id="p16">トリガー: 日程調整の依頼メールが届いたら
+処理: カレンダーの空き状況を確認 → 候補日時を返信案として提示
+変数: 候補日時リスト
+自然言語で作るなら: "日程調整メールが来たら、空いている時間を返信案として出して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p16',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p16','flow-16.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">17. 会議前リマインドの自動送信</div><div class="idesc">会議資料の有無を確認をきっかけに自動で進みます。</div><pre class="prompt" id="p17">トリガー: 会議開始30分前になったら
+処理: 会議資料の有無を確認 → 参加者にリマインドをChatで送付
+変数: 会議名・資料リンク
+自然言語で作るなら: "会議の30分前に、資料へのリンク付きでリマインドして"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p17',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p17','flow-17.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">18. 週次定例の準備チェックリスト送付</div><div class="idesc">前回の議事録から未完了事項を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p18">トリガー: 毎週の定例会議の前日になったら
+処理: 前回の議事録から未完了事項を抽出 → チェックリストとして送付
+変数: 未完了事項リスト
+自然言語で作るなら: "定例会議の前日に、前回の宿題を一覧にして送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p18',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p18','flow-18.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">19. 出張予定のカレンダー自動ブロック</div><div class="idesc">出張期間を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p19">トリガー: 出張申請フォームに回答があったら
+処理: 出張期間を抽出 → カレンダーに時間を確保(Block time)
+変数: 出張開始日・終了日
+自然言語で作るなら: "出張申請が来たら、その期間のカレンダーを自動でブロックして"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p19',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p19','flow-19.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">20. 面談予約フォームからの日程確定通知</div><div class="idesc">希望日時を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p20">トリガー: 面談予約フォームに回答があったら
+処理: 希望日時を抽出 → カレンダー登録+双方へ通知
+変数: 確定日時
+自然言語で作るなら: "面談予約が来たら、カレンダーに入れて双方に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p20',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p20','flow-20.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">21. 会議室予約状況の日次サマリー</div><div class="idesc">当日の会議室予約状況を取得をきっかけに自動で進みます。</div><pre class="prompt" id="p21">トリガー: 毎朝9時になったら
+処理: 当日の会議室予約状況を取得 → 空き状況をまとめて通知
+変数: 当日の予約一覧
+自然言語で作るなら: "毎朝、今日の会議室の空き状況をまとめて教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p21',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p21','flow-21.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">22. オンライン会議のリンク自動発行+共有</div><div class="idesc">Meetリンクを発行をきっかけに自動で進みます。</div><pre class="prompt" id="p22">トリガー: 会議依頼フォームに回答があったら
+処理: Meetリンクを発行 → 参加者へ一斉共有
+変数: 発行したMeetリンク
+自然言語で作るなら: "会議の依頼が来たら、リンクを発行して参加者に共有して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p22',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p22','flow-22.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">23. 締切前タスクのカレンダー登録</div><div class="idesc">締切日を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p23">トリガー: 新しいタスクが作成されたら
+処理: 締切日を抽出 → カレンダーに予定として登録
+変数: タスク名・締切日
+自然言語で作るなら: "締切のあるタスクは、自動でカレンダーに入れて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p23',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p23','flow-23.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">24. 休暇申請の承認フロー通知</div><div class="idesc">申請内容を要約をきっかけに自動で進みます。</div><pre class="prompt" id="p24">トリガー: 休暇申請フォームに回答があったら
+処理: 申請内容を要約 → 承認者のChatに通知
+変数: 申請者名・期間・理由
+自然言語で作るなら: "休暇申請が来たら、承認者にすぐ知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p24',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p24','flow-24.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">顧客対応・問い合わせ</h2>
+<div class="icard"><div class="ititle">25. 問い合わせフォーム回答の種類判定</div><div class="idesc">Geminiが内容を種類ごとに分類をきっかけに自動で進みます。</div><pre class="prompt" id="p25">トリガー: 問い合わせフォームに回答があったら
+処理: Geminiが内容を種類ごとに分類 → 対応案とあわせてChatに通知
+変数: 種類・対応案(JSON)
+自然言語で作るなら: "問い合わせが来たら、種類を判定して対応案と一緒に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p25',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p25','flow-25.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">26. 緊急度別のChat通知振り分け</div><div class="idesc">Geminiが緊急度を3段階で判定をきっかけに自動で進みます。</div><pre class="prompt" id="p26">トリガー: 問い合わせフォームに回答があったら
+処理: Geminiが緊急度を3段階で判定 → 段階に応じて通知先を出し分け
+変数: 緊急度レベル
+自然言語で作るなら: "問い合わせの緊急度を判定して、レベルに応じて通知先を変えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p26',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p26','flow-26.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">27. FAQに基づく一次回答案の自動生成</div><div class="idesc">社内FAQドキュメントを参照をきっかけに自動で進みます。</div><pre class="prompt" id="p27">トリガー: 問い合わせが届いたら
+処理: 社内FAQドキュメントを参照 → 一次回答案を下書き作成
+変数: 回答案テキスト
+自然言語で作るなら: "問い合わせにはFAQを見て、まず一次回答案を作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p27',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p27','flow-27.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">28. 対応履歴のスプレッドシート自動記録</div><div class="idesc">対応内容を要約をきっかけに自動で進みます。</div><pre class="prompt" id="p28">トリガー: 問い合わせに対応したら
+処理: 対応内容を要約 → 対応履歴表に1行追加
+変数: 対応日時・内容の要約
+自然言語で作るなら: "問い合わせ対応が終わったら、履歴表に記録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p28',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p28','flow-28.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">29. アンケート回答の感情分析サマリー</div><div class="idesc">Geminiが好意的/中立/否定的を判定をきっかけに自動で進みます。</div><pre class="prompt" id="p29">トリガー: アンケートフォームに回答があったら
+処理: Geminiが好意的/中立/否定的を判定 → 週次でサマリー化
+変数: 感情分類の集計
+自然言語で作るなら: "アンケートの回答がポジティブかネガティブか判定して、週ごとにまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p29',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p29','flow-29.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">30. サポートチケットの担当割り振り提案</div><div class="idesc">内容から適任者を推定をきっかけに自動で進みます。</div><pre class="prompt" id="p30">トリガー: サポートチケットが起票されたら
+処理: 内容から適任者を推定 → 担当候補をChatで提案
+変数: 推定担当者名
+自然言語で作るなら: "サポートチケットが来たら、誰が対応すべきか提案して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p30',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p30','flow-30.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">31. 契約更新前リマインドの自動送信</div><div class="idesc">対象契約を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p31">トリガー: 契約終了日の30日前になったら
+処理: 対象契約を抽出 → 担当営業へリマインド送付
+変数: 契約先名・終了日
+自然言語で作るなら: "契約更新の30日前になったら、担当営業に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p31',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p31','flow-31.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">32. 解約申請メールの即時エスカレーション</div><div class="idesc">Geminiが解約意向を検知をきっかけに自動で進みます。</div><pre class="prompt" id="p32">トリガー: 解約に関するメールを受信したら
+処理: Geminiが解約意向を検知 → 責任者へ即時エスカレーション
+変数: 顧客名・解約理由(推定)
+自然言語で作るなら: "解約したそうなメールが来たら、すぐ責任者に伝えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p32',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p32','flow-32.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">33. 顧客からの資料請求への自動送付</div><div class="idesc">該当資料をドライブから取得をきっかけに自動で進みます。</div><pre class="prompt" id="p33">トリガー: 資料請求フォームに回答があったら
+処理: 該当資料をドライブから取得 → 自動返信で送付
+変数: 送付資料のリンク
+自然言語で作るなら: "資料請求が来たら、該当資料へのリンクを自動で返信して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p33',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p33','flow-33.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">34. 商談後フォローメールの下書き作成</div><div class="idesc">Geminiが商談内容を要約をきっかけに自動で進みます。</div><pre class="prompt" id="p34">トリガー: 商談メモが作成されたら
+処理: Geminiが商談内容を要約 → フォローメールの下書きを作成
+変数: 商談要約・下書き文面
+自然言語で作るなら: "商談が終わったらメモを見て、お礼メールの下書きを作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p34',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p34','flow-34.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">35. レビュー投稿の内容分類+通知</div><div class="idesc">内容を良い点/改善点に分類をきっかけに自動で進みます。</div><pre class="prompt" id="p35">トリガー: レビューフォームに回答があったら
+処理: 内容を良い点/改善点に分類 → 担当チャンネルへ通知
+変数: 分類結果
+自然言語で作るなら: "レビューが来たら、良い点と改善点に分けて担当に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p35',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p35','flow-35.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">36. 問い合わせ増加日のアラート</div><div class="idesc">当日の問い合わせ件数を集計をきっかけに自動で進みます。</div><pre class="prompt" id="p36">トリガー: 毎日終業時になったら
+処理: 当日の問い合わせ件数を集計 → 通常より多ければアラート通知
+変数: 当日件数・平均比
+自然言語で作るなら: "今日の問い合わせがいつもより多かったら教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p36',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p36','flow-36.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">経理・請求</h2>
+<div class="icard"><div class="ititle">37. 請求書PDFの金額抽出+台帳登録</div><div class="idesc">Geminiが金額・発行元・期日を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p37">トリガー: 請求書フォルダにファイルが追加されたら
+処理: Geminiが金額・発行元・期日を抽出 → 経理台帳に1行追加
+変数: 抽出した請求情報(JSON)
+自然言語で作るなら: "請求書が届いたら、金額と期日を読み取って台帳に記録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p37',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p37','flow-37.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">38. 経費申請メールの内容チェック</div><div class="idesc">申請内容が規定内か判定をきっかけに自動で進みます。</div><pre class="prompt" id="p38">トリガー: 経費申請メールを受信したら
+処理: 申請内容が規定内か判定 → 不備があれば差し戻しコメント
+変数: 判定結果・差し戻し理由
+自然言語で作るなら: "経費申請が来たら、規定に沿っているかチェックして"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p38',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p38','flow-38.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">39. 支払い期限リマインドの自動送信</div><div class="idesc">対象の請求を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p39">トリガー: 支払い期限の3日前になったら
+処理: 対象の請求を抽出 → 経理担当へリマインド
+変数: 請求先名・金額・期日
+自然言語で作るなら: "支払い期限の3日前になったら、経理に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p39',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p39','flow-39.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">40. 月次売上サマリーのレポート化</div><div class="idesc">前月の売上データを集計をきっかけに自動で進みます。</div><pre class="prompt" id="p40">トリガー: 毎月1日になったら
+処理: 前月の売上データを集計 → レポート形式でドキュメント化
+変数: 月次集計データ
+自然言語で作るなら: "毎月1日に、前月の売上をレポートにまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p40',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p40','flow-40.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">41. 領収書メールの自動仕分け</div><div class="idesc">Geminiが金額・支払先を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p41">トリガー: 領収書らしいメールを受信したら
+処理: Geminiが金額・支払先を抽出 → カテゴリ別フォルダに保存
+変数: 金額・支払先・カテゴリ
+自然言語で作るなら: "領収書のメールは、内容を見てカテゴリ別に整理して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p41',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p41','flow-41.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">42. 見積書テンプレートへの自動転記</div><div class="idesc">確定情報をテンプレートへ反映をきっかけに自動で進みます。</div><pre class="prompt" id="p42">トリガー: 見積もり内容が確定したら
+処理: 確定情報をテンプレートへ反映 → ドキュメントとして生成
+変数: 品目・金額・宛先
+自然言語で作るなら: "見積もり内容が固まったら、テンプレートに転記して見積書を作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p42',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p42','flow-42.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">43. 未払い一覧の週次通知</div><div class="idesc">未払いの請求を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p43">トリガー: 毎週月曜9時になったら
+処理: 未払いの請求を抽出 → 一覧にして経理へ通知
+変数: 未払い一覧
+自然言語で作るなら: "毎週月曜に、未払いの請求一覧を経理に送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p43',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p43','flow-43.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">44. 交通費精算の一次チェック</div><div class="idesc">金額と経路の妥当性を確認をきっかけに自動で進みます。</div><pre class="prompt" id="p44">トリガー: 交通費精算フォームに回答があったら
+処理: 金額と経路の妥当性を確認 → 不自然な点があれば確認依頼
+変数: チェック結果
+自然言語で作るなら: "交通費精算が来たら、金額に不自然な点がないか確認して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p44',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p44','flow-44.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">45. 契約金額の変更履歴記録</div><div class="idesc">変更前後の金額差分を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p45">トリガー: 契約書ドキュメントが更新されたら
+処理: 変更前後の金額差分を抽出 → 変更履歴表に追記
+変数: 変更前後の金額
+自然言語で作るなら: "契約金額が変わったら、変更履歴として記録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p45',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p45','flow-45.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">46. 予算超過アラートの自動検知</div><div class="idesc">各項目の予算消化率を計算をきっかけに自動で進みます。</div><pre class="prompt" id="p46">トリガー: 予算管理シートが更新されたら
+処理: 各項目の予算消化率を計算 → 80%を超えたらアラート
+変数: 項目名・消化率
+自然言語で作るなら: "予算の消化率が8割を超えたら、すぐ教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p46',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p46','flow-46.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">人事・総務</h2>
+<div class="icard"><div class="ititle">47. 入社手続きチェックリストの自動送付</div><div class="idesc">対象者の入社手続き一覧を取得をきっかけに自動で進みます。</div><pre class="prompt" id="p47">トリガー: 入社日の1週間前になったら
+処理: 対象者の入社手続き一覧を取得 → チェックリストとして本人へ送付
+変数: 氏名・入社日・手続き一覧
+自然言語で作るなら: "入社の1週間前になったら、必要な手続きを本人に案内して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p47',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p47','flow-47.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">48. 勤怠申請の不備チェック</div><div class="idesc">申請内容が規定と矛盾しないか確認をきっかけに自動で進みます。</div><pre class="prompt" id="p48">トリガー: 勤怠修正申請が届いたら
+処理: 申請内容が規定と矛盾しないか確認 → 不備があれば差し戻し
+変数: チェック結果・差し戻し理由
+自然言語で作るなら: "勤怠の修正申請が来たら、内容に不備がないか確認して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p48',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p48','flow-48.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">49. 社内アンケート回答の集計サマリー</div><div class="idesc">全回答を集計をきっかけに自動で進みます。</div><pre class="prompt" id="p49">トリガー: アンケートの回答期限が来たら
+処理: 全回答を集計 → 傾向をサマリー化
+変数: 集計結果
+自然言語で作るなら: "アンケートの回答が締め切られたら、結果をまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p49',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p49','flow-49.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">50. 備品発注依頼の一次受付</div><div class="idesc">在庫・予算の確認を依頼をきっかけに自動で進みます。</div><pre class="prompt" id="p50">トリガー: 備品発注フォームに回答があったら
+処理: 在庫・予算の確認を依頼 → 総務担当へ通知
+変数: 品目・数量・申請者
+自然言語で作るなら: "備品の発注依頼が来たら、総務に内容を伝えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p50',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p50','flow-50.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">51. 社内規定変更の周知通知</div><div class="idesc">変更点をGeminiが要約をきっかけに自動で進みます。</div><pre class="prompt" id="p51">トリガー: 規定ドキュメントが更新されたら
+処理: 変更点をGeminiが要約 → 全社Chatへ周知
+変数: 変更点の要約
+自然言語で作るなら: "社内規定が変わったら、変更点を要約して全社に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p51',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p51','flow-51.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">52. 健康診断予約リマインド</div><div class="idesc">未予約者を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p52">トリガー: 健康診断の予約期限が近づいたら
+処理: 未予約者を抽出 → リマインドを送付
+変数: 未予約者リスト
+自然言語で作るなら: "健康診断をまだ予約していない人に、リマインドを送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p52',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p52','flow-52.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">53. 研修申込フォームの自動振り分け</div><div class="idesc">希望研修ごとに参加者を分類をきっかけに自動で進みます。</div><pre class="prompt" id="p53">トリガー: 研修申込フォームに回答があったら
+処理: 希望研修ごとに参加者を分類 → 担当講師へ共有
+変数: 研修名・参加者一覧
+自然言語で作るなら: "研修の申し込みが来たら、研修ごとに振り分けて講師に共有して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p53',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p53','flow-53.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">54. 退職手続きタスクの自動生成</div><div class="idesc">必要な退職手続きを洗い出しをきっかけに自動で進みます。</div><pre class="prompt" id="p54">トリガー: 退職届が受理されたら
+処理: 必要な退職手続きを洗い出し → タスクとして1件ずつ登録
+変数: 手続き項目リスト
+自然言語で作るなら: "退職が決まったら、必要な手続きをタスクにして"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p54',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p54','flow-54.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">55. 座席・備品管理台帳の更新</div><div class="idesc">異動情報を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p55">トリガー: 座席異動の連絡が来たら
+処理: 異動情報を抽出 → 管理台帳を更新
+変数: 氏名・新旧座席
+自然言語で作るなら: "座席が変わったら、管理台帳を更新して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p55',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p55','flow-55.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">56. 社内イベント出欠管理</div><div class="idesc">出欠を集計をきっかけに自動で進みます。</div><pre class="prompt" id="p56">トリガー: イベント案内フォームに回答があったら
+処理: 出欠を集計 → 主催者へ随時共有
+変数: 出欠状況
+自然言語で作るなら: "社内イベントの出欠が来たら、主催者にリアルタイムで伝えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p56',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p56','flow-56.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">営業・CRM連携</h2>
+<div class="icard"><div class="ititle">57. 営業リード表の行ごとにメール下書き</div><div class="idesc">表の行を1件ずつ取得(Repeat for each)をきっかけに自動で進みます。</div><pre class="prompt" id="p57">トリガー: 週次で営業リード表を確認するタイミングになったら
+処理: 表の行を1件ずつ取得(Repeat for each) → 各リードにあわせたメール下書きを作成
+変数: リード情報(氏名/会社/状況)
+自然言語で作るなら: "リード表の行ごとに、フォローメールの下書きを作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p57',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p57','flow-57.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">58. 商談ステータス変更の通知</div><div class="idesc">変更内容を検知をきっかけに自動で進みます。</div><pre class="prompt" id="p58">トリガー: 商談管理シートのステータスが更新されたら
+処理: 変更内容を検知 → 関係者へChat通知
+変数: 商談名・新ステータス
+自然言語で作るなら: "商談のステータスが変わったら、関係者に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p58',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p58','flow-58.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">59. 名刺データの台帳自動登録</div><div class="idesc">Geminiが企業名・氏名・連絡先を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p59">トリガー: 名刺画像がフォルダに追加されたら
+処理: Geminiが企業名・氏名・連絡先を抽出 → 名刺管理台帳に1行追加
+変数: 抽出した名刺情報(JSON)
+自然言語で作るなら: "名刺の画像を置いたら、内容を読み取って台帳に登録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p59',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p59','flow-59.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">60. 見込み客からの反応をスコアリング</div><div class="idesc">反応内容から関心度を推定をきっかけに自動で進みます。</div><pre class="prompt" id="p60">トリガー: メール開封・返信などの反応があったら
+処理: 反応内容から関心度を推定 → スコアを台帳に記録
+変数: 関心度スコア
+自然言語で作るなら: "見込み客の反応があったら、関心度を推定して記録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p60',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p60','flow-60.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">61. 提案書送付後のフォローアップ</div><div class="idesc">未返信であればフォローメール下書きをきっかけに自動で進みます。</div><pre class="prompt" id="p61">トリガー: 提案書を送付してから3日後になったら
+処理: 未返信であればフォローメール下書き
+変数: 送付先・提案書名
+自然言語で作るなら: "提案書を送って3日返信がなければ、フォローメールを作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p61',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p61','flow-61.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">62. 商談議事録からネクストアクション抽出</div><div class="idesc">Geminiがネクストアクションを抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p62">トリガー: 商談議事録が作成されたら
+処理: Geminiがネクストアクションを抽出 → 担当者ごとにタスク化
+変数: アクション項目・担当者
+自然言語で作るなら: "商談議事録から次にやることを抜き出して、担当者ごとにタスクにして"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p62',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p62','flow-62.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">63. 週次パイプラインサマリー</div><div class="idesc">商談管理シートを集計をきっかけに自動で進みます。</div><pre class="prompt" id="p63">トリガー: 毎週金曜17時になったら
+処理: 商談管理シートを集計 → フェーズ別サマリーを作成
+変数: フェーズ別件数・金額
+自然言語で作るなら: "毎週金曜に、商談の進捗をフェーズ別にまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p63',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p63','flow-63.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">64. 契約書ドラフトの初稿作成</div><div class="idesc">確定条件をテンプレートへ反映をきっかけに自動で進みます。</div><pre class="prompt" id="p64">トリガー: 契約条件が確定したら
+処理: 確定条件をテンプレートへ反映 → 初稿ドキュメントを生成
+変数: 契約条件(相手先/金額/期間)
+自然言語で作るなら: "契約条件が決まったら、契約書の初稿を作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p64',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p64','flow-64.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">65. 顧客別のやり取り履歴集約</div><div class="idesc">該当顧客とのメール・メモを収集をきっかけに自動で進みます。</div><pre class="prompt" id="p65">トリガー: 月末になったら
+処理: 該当顧客とのメール・メモを収集 → 1つのドキュメントに集約
+変数: 顧客名・やり取り履歴
+自然言語で作るなら: "月末に、顧客ごとのやり取りを1つにまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p65',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p65','flow-65.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">66. 失注理由の分類集計</div><div class="idesc">失注理由をGeminiが分類をきっかけに自動で進みます。</div><pre class="prompt" id="p66">トリガー: 商談が失注ステータスになったら
+処理: 失注理由をGeminiが分類 → 月次で集計
+変数: 失注理由カテゴリ
+自然言語で作るなら: "失注した商談の理由を分類して、月ごとに集計して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p66',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p66','flow-66.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">ドキュメント・ナレッジ管理</h2>
+<div class="icard"><div class="ititle">67. 議事録から社内Wiki用ページを自動生成</div><div class="idesc">Geminiが社内Wiki形式に変換をきっかけに自動で進みます。</div><pre class="prompt" id="p67">トリガー: 議事録が確定したら
+処理: Geminiが社内Wiki形式に変換 → ナレッジベースに追加
+変数: 整形済みWikiページ
+自然言語で作るなら: "確定した議事録を、社内Wikiのページ形式にして追加して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p67',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p67','flow-67.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">68. マニュアル更新の変更履歴記録</div><div class="idesc">変更箇所を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p68">トリガー: マニュアルドキュメントが更新されたら
+処理: 変更箇所を抽出 → 変更履歴表に追記
+変数: 変更箇所の要約
+自然言語で作るなら: "マニュアルが更新されたら、何が変わったか記録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p68',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p68','flow-68.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">69. NotebookLMを使った資料への質問応答フロー</div><div class="idesc">NotebookLMのノートブックに質問をきっかけに自動で進みます。</div><pre class="prompt" id="p69">トリガー: 社内問い合わせがマニュアルに関するものだったら
+処理: NotebookLMのノートブックに質問 → 回答を要約して返信
+変数: NotebookLMの回答
+自然言語で作るなら: "マニュアルに関する質問が来たら、資料を根拠に回答して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p69',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p69','flow-69.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">70. 社内ナレッジのカテゴリ別自動振り分け</div><div class="idesc">内容からカテゴリを推定をきっかけに自動で進みます。</div><pre class="prompt" id="p70">トリガー: ナレッジ投稿フォームに回答があったら
+処理: 内容からカテゴリを推定 → 該当フォルダへ保存
+変数: 推定カテゴリ
+自然言語で作るなら: "投稿されたナレッジを、内容を見てカテゴリごとに整理して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p70',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p70','flow-70.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">71. ドキュメントの体裁統一チェック</div><div class="idesc">社内フォーマットとの差分を確認をきっかけに自動で進みます。</div><pre class="prompt" id="p71">トリガー: ドキュメントが共有されたら
+処理: 社内フォーマットとの差分を確認 → 修正提案をコメント
+変数: 体裁の差分箇所
+自然言語で作るなら: "共有されたドキュメントが、社内フォーマットに沿っているか確認して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p71',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p71','flow-71.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">72. 古い資料の棚卸しリスト作成</div><div class="idesc">更新が半年以上ないファイルを抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p72">トリガー: 四半期の初めになったら
+処理: 更新が半年以上ないファイルを抽出 → 棚卸しリストとして通知
+変数: 対象ファイル一覧
+自然言語で作るなら: "半年以上更新のない資料を、棚卸しリストにして教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p72',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p72','flow-72.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">73. 複数資料の要点を1枚に集約</div><div class="idesc">各資料の要点をGeminiが抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p73">トリガー: 関連資料が複数指定されたら
+処理: 各資料の要点をGeminiが抽出 → 1枚のサマリーに統合
+変数: 統合サマリー
+自然言語で作るなら: "この資料たちの要点を、1枚にまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p73',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p73','flow-73.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">74. 用語集の自動更新</div><div class="idesc">定義をGeminiが整形をきっかけに自動で進みます。</div><pre class="prompt" id="p74">トリガー: 新しい社内用語が投稿されたら
+処理: 定義をGeminiが整形 → 用語集ドキュメントに追記
+変数: 用語・定義
+自然言語で作るなら: "新しい用語が投稿されたら、用語集に追加して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p74',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p74','flow-74.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">75. 資料レビュー依頼の自動配信</div><div class="idesc">対象資料へのリンクを取得をきっかけに自動で進みます。</div><pre class="prompt" id="p75">トリガー: レビュー依頼フォームに回答があったら
+処理: 対象資料へのリンクを取得 → レビュアーへ配信
+変数: 資料リンク・依頼者名
+自然言語で作るなら: "資料のレビュー依頼が来たら、レビュアーに配信して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p75',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p75','flow-75.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">76. 版数管理台帳の自動更新</div><div class="idesc">版数と更新日を検知をきっかけに自動で進みます。</div><pre class="prompt" id="p76">トリガー: ドキュメントが新しいバージョンで保存されたら
+処理: 版数と更新日を検知 → 版数管理台帳に追記
+変数: 版数・更新日
+自然言語で作るなら: "ドキュメントが更新されたら、版数管理表に記録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p76',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p76','flow-76.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">チーム連携・通知</h2>
+<div class="icard"><div class="ititle">77. 毎朝のニュース見出し要約配信</div><div class="idesc">業界ニュースを収集をきっかけに自動で進みます。</div><pre class="prompt" id="p77">トリガー: 毎朝8時になったら
+処理: 業界ニュースを収集 → Geminiが見出しだけ要約
+変数: 見出し要約リスト
+自然言語で作るなら: "毎朝8時に、業界ニュースの見出しだけまとめて送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p77',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p77','flow-77.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">78. チーム全体への進捗ダイジェスト</div><div class="idesc">各タスクの進捗を集計をきっかけに自動で進みます。</div><pre class="prompt" id="p78">トリガー: 毎週金曜の終業時になったら
+処理: 各タスクの進捗を集計 → ダイジェストとして配信
+変数: 進捗サマリー
+自然言語で作るなら: "毎週金曜に、チームの進捗をまとめて配信して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p78',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p78','flow-78.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">79. Slack/Chat横断の重要トピック抽出</div><div class="idesc">その日のChatメッセージを収集をきっかけに自動で進みます。</div><pre class="prompt" id="p79">トリガー: 1日の終わりになったら
+処理: その日のChatメッセージを収集 → 重要そうな話題だけ抽出
+変数: 重要トピックの要約
+自然言語で作るなら: "今日のChatで話題になった重要な件だけ、まとめて教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p79',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p79','flow-79.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">80. タスク遅延の自動アラート</div><div class="idesc">遅延タスクを検知をきっかけに自動で進みます。</div><pre class="prompt" id="p80">トリガー: タスクの締切が過ぎたら
+処理: 遅延タスクを検知 → 担当者へアラート通知
+変数: タスク名・遅延日数
+自然言語で作るなら: "締切を過ぎたタスクがあれば、担当者にすぐ知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p80',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p80','flow-80.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">81. 新規メンバーへのオンボーディング案内</div><div class="idesc">オンボーディング資料一式を取得をきっかけに自動で進みます。</div><pre class="prompt" id="p81">トリガー: 新規メンバーが追加されたら
+処理: オンボーディング資料一式を取得 → 案内メッセージとして送付
+変数: 資料リンク一覧
+自然言語で作るなら: "新しいメンバーが増えたら、オンボーディング案内を送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p81',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p81','flow-81.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">82. 週報の自動リマインド+集約</div><div class="idesc">未提出者にリマインドをきっかけに自動で進みます。</div><pre class="prompt" id="p82">トリガー: 毎週金曜15時になったら
+処理: 未提出者にリマインド → 提出済みの週報を1つに集約
+変数: 週報の要約集
+自然言語で作るなら: "週報を出していない人にリマインドして、出ている分はまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p82',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p82','flow-82.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">83. プロジェクト完了時の関係者通知</div><div class="idesc">関係者リストを取得をきっかけに自動で進みます。</div><pre class="prompt" id="p83">トリガー: プロジェクトのステータスが完了になったら
+処理: 関係者リストを取得 → 完了報告を一斉送付
+変数: プロジェクト名・完了日
+自然言語で作るなら: "プロジェクトが完了したら、関係者全員に報告して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p83',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p83','flow-83.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">84. 社内表彰・お知らせの自動配信</div><div class="idesc">内容を整形をきっかけに自動で進みます。</div><pre class="prompt" id="p84">トリガー: 表彰・お知らせフォームに入力があったら
+処理: 内容を整形 → 全社Chatへ配信
+変数: お知らせ本文
+自然言語で作るなら: "表彰やお知らせが登録されたら、全社に配信して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p84',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p84','flow-84.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">85. 障害・トラブル発生時の一斉通知</div><div class="idesc">内容を要約をきっかけに自動で進みます。</div><pre class="prompt" id="p85">トリガー: 障害報告フォームに回答があったら
+処理: 内容を要約 → 関係チャンネルへ一斉通知
+変数: 障害内容・影響範囲
+自然言語で作るなら: "障害の報告が来たら、内容を要約して関係者に知らせて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p85',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p85','flow-85.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">86. 定例会議の議題事前収集</div><div class="idesc">議題募集フォームへの誘導を送付をきっかけに自動で進みます。</div><pre class="prompt" id="p86">トリガー: 定例会議の2日前になったら
+処理: 議題募集フォームへの誘導を送付 → 集まった議題を一覧化
+変数: 議題リスト
+自然言語で作るなら: "定例会議の2日前に、議題を募集してまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p86',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p86','flow-86.txt',this)">⬇ ダウンロード</button></div></div>
+<h2 class="cat">個人生産性</h2>
+<div class="icard"><div class="ititle">87. 1日の未読メール概要取得</div><div class="idesc">その日の未読メールを取得をきっかけに自動で進みます。</div><pre class="prompt" id="p87">トリガー: 毎日夜になったら
+処理: その日の未読メールを取得 → 概要をChat通知
+変数: 未読メール概要
+自然言語で作るなら: "毎日夜に、その日の未読メールの概要を教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p87',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p87','flow-87.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">88. フォロー必要メールへのスター付与</div><div class="idesc">フォローが必要そうか判定をきっかけに自動で進みます。</div><pre class="prompt" id="p88">トリガー: メールを受信したら
+処理: フォローが必要そうか判定 → 該当メールにスターを付与
+変数: 要フォローフラグ
+自然言語で作るなら: "対応が必要そうなメールに、自動でスターを付けて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p88',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p88','flow-88.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">89. 朝の予定+天気+ニュースまとめ配信</div><div class="idesc">当日の予定・天気・主要ニュースを収集をきっかけに自動で進みます。</div><pre class="prompt" id="p89">トリガー: 毎朝7時になったら
+処理: 当日の予定・天気・主要ニュースを収集 → 1通にまとめて配信
+変数: 当日の統合サマリー
+自然言語で作るなら: "毎朝7時に、今日の予定と天気とニュースを1通にまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p89',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p89','flow-89.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">90. To Doリストの自動整理</div><div class="idesc">Google ToDoの項目を優先度順に並べ替えをきっかけに自動で進みます。</div><pre class="prompt" id="p90">トリガー: 毎朝になったら
+処理: Google ToDoの項目を優先度順に並べ替え → 上位項目を通知
+変数: 優先度付きTo Doリスト
+自然言語で作るなら: "毎朝、今日やることを優先順位順に並べて教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p90',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p90','flow-90.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">91. 資料下書きの叩き台作成</div><div class="idesc">要件をGeminiに伝えるをきっかけに自動で進みます。</div><pre class="prompt" id="p91">トリガー: 資料作成の依頼を受けたら
+処理: 要件をGeminiに伝える → 叩き台ドキュメントを生成
+変数: 資料の構成案
+自然言語で作るなら: "この内容で、資料の叩き台を作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p91',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p91','flow-91.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">92. 週次の振り返りメモ自動生成</div><div class="idesc">その週のタスク完了状況を集計をきっかけに自動で進みます。</div><pre class="prompt" id="p92">トリガー: 毎週金曜の終業時になったら
+処理: その週のタスク完了状況を集計 → 振り返りメモを作成
+変数: 週次振り返りテキスト
+自然言語で作るなら: "今週やったことを振り返って、メモにまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p92',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p92','flow-92.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">93. 名刺画像からの連絡先登録</div><div class="idesc">Geminiが情報を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p93">トリガー: 名刺画像を指定フォルダに置いたら
+処理: Geminiが情報を抽出 → 連絡先として登録
+変数: 氏名・会社・連絡先
+自然言語で作るなら: "名刺の写真を置いたら、連絡先として登録して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p93',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p93','flow-93.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">94. 長文メールの3行要約</div><div class="idesc">本文をGeminiが3行に要約をきっかけに自動で進みます。</div><pre class="prompt" id="p94">トリガー: 長いメールを受信したら
+処理: 本文をGeminiが3行に要約
+変数: 3行要約テキスト
+自然言語で作るなら: "長いメールが来たら、3行に要約して"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p94',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p94','flow-94.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">95. 複数ソースからの情報収集ダイジェスト</div><div class="idesc">各ソースの更新内容を収集をきっかけに自動で進みます。</div><pre class="prompt" id="p95">トリガー: 指定した情報源が更新されたら
+処理: 各ソースの更新内容を収集 → 1通のダイジェストに統合
+変数: 統合ダイジェスト
+自然言語で作るなら: "登録した情報源が更新されたら、まとめて教えて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p95',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p95','flow-95.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">96. スプレッドシートのデータ行を1件ずつメール送信</div><div class="idesc">行を1件ずつ取得(Repeat for each)をきっかけに自動で進みます。</div><pre class="prompt" id="p96">トリガー: 対象シートを確認するタイミングになったら
+処理: 行を1件ずつ取得(Repeat for each) → 各行の宛先にメール送信
+変数: 行データ(宛先/本文情報)
+自然言語で作るなら: "この表の行ごとに、宛先へメールを送って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p96',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p96','flow-96.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">97. 定型業務のチェックリスト化</div><div class="idesc">過去の作業ログから頻出パターンを抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p97">トリガー: 繰り返しの多い作業を洗い出すとき
+処理: 過去の作業ログから頻出パターンを抽出 → チェックリスト化して保存
+変数: 作業手順リスト
+自然言語で作るなら: "よくやる作業を、チェックリストにまとめて"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p97',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p97','flow-97.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">98. 資料の翻訳下書き作成</div><div class="idesc">Geminiが日本語訳の下書きを作成をきっかけに自動で進みます。</div><pre class="prompt" id="p98">トリガー: 英語資料の翻訳依頼が来たら
+処理: Geminiが日本語訳の下書きを作成
+変数: 翻訳下書きテキスト
+自然言語で作るなら: "この資料を、日本語に訳した下書きを作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p98',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p98','flow-98.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">99. 会議アジェンダのテンプレート生成</div><div class="idesc">過去の議事録から典型的な項目を抽出をきっかけに自動で進みます。</div><pre class="prompt" id="p99">トリガー: 新しい定例会議を設定するとき
+処理: 過去の議事録から典型的な項目を抽出 → アジェンダテンプレートを作成
+変数: アジェンダ項目リスト
+自然言語で作るなら: "この定例会議用の、アジェンダテンプレートを作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p99',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p99','flow-99.txt',this)">⬇ ダウンロード</button></div></div>
+<div class="icard"><div class="ititle">100. 月末振り返りレポートの自動作成</div><div class="idesc">その月の主要な出来事・数字を収集をきっかけに自動で進みます。</div><pre class="prompt" id="p100">トリガー: 毎月末になったら
+処理: その月の主要な出来事・数字を収集 → レポート形式でまとめる
+変数: 月次レポート本文
+自然言語で作るなら: "月末に、今月の振り返りレポートを作って"</pre><div class="cbtns"><button class="btn sm" onclick="copyPrompt('p100',this)">📋 コピー</button><button class="btn sm ghost" onclick="downloadText('p100','flow-100.txt',this)">⬇ ダウンロード</button></div></div>
+<pre id="pfull" class="hidden"># 🎁 業務シーン別フロー設計図100選
+
+Workspace Studioで「トリガー→処理→変数」をどう組めばいいか、業務シーン別に100パターンまとめました。
+
+**受け取り方**: 各項目のコードブロックをコピーするか、このファイルをそのままダウンロードしてください。
+
+**使い方**: 「自然言語で作るなら」の1行をWorkspace Studioの自然言語入力欄にそのまま貼るか、トリガー/処理/変数を見ながら手動で組み立ててください。
+
+## メール管理
+
+### 1. 重要人物からのメール通知
+
+```text
+トリガー: 上司や取引先などVIPリストのメールを受信したら
+処理: Geminiが送信元をVIPリストと照合 → 該当すればChatに即時通知
+変数: 送信元アドレス・件名をChatメッセージへ渡す
+自然言語で作るなら: "上司からメールが来たら、件名と要約をすぐChatで教えて"
+```
+
+### 2. 未読メールの1日サマリー
+
+```text
+トリガー: 毎日18時になったら
+処理: その日の未読メールを取得 → Geminiが要点を3行で要約 → Chatに一括通知
+変数: 未読メール本文の要約テキスト
+自然言語で作るなら: "毎日18時に、その日届いた未読メールの内容を3行で要約してChatに送って"
+```
+
+### 3. アクションアイテム付きメールにラベル
+
+```text
+トリガー: メールを受信したら
+処理: Geminiが本文から要対応の有無を判定 → 該当すれば専用ラベルを付与
+変数: 要対応フラグ(true/false)
+自然言語で作るなら: "対応が必要そうなメールに自動でラベルを付けて"
+```
+
+### 4. 問い合わせメールの自動要約+返信案
+
+```text
+トリガー: 問い合わせ用アドレス宛にメールが届いたら
+処理: Geminiが内容を要約 → 返信案を下書き作成
+変数: 要約テキスト・返信案テキスト
+自然言語で作るなら: "問い合わせメールが来たら、内容を要約して返信の下書きも作って"
+```
+
+### 5. 見積もり依頼メールの内容抽出
+
+```text
+トリガー: 見積もり関連のメールを受信したら
+処理: Geminiが品目・数量・希望納期を抽出 → スプレッドシートに1行追加
+変数: 抽出したJSON(品目/数量/納期)
+自然言語で作るなら: "見積もり依頼メールから品目・数量・納期を読み取って表に追加して"
+```
+
+### 6. クレームメールの緊急検知+即時通知
+
+```text
+トリガー: メールを受信したら
+処理: Geminiが苦情・クレームの可能性を判定 → 該当すれば担当チャンネルへ即時通知
+変数: 緊急度フラグ・要約
+自然言語で作るなら: "クレームらしいメールが来たら、すぐ担当チャンネルに知らせて"
+```
+
+### 7. 添付ファイル付きメールの自動保存
+
+```text
+トリガー: 添付ファイル付きメールを受信したら
+処理: 添付を指定のドライブフォルダへ保存 → 保存先リンクをメール内容と紐付け
+変数: 保存先フォルダのファイルリンク
+自然言語で作るなら: "添付ファイルが付いたメールが来たら、指定フォルダに自動保存して"
+```
+
+### 8. 定期レポートメールの数値抽出
+
+```text
+トリガー: 定型フォーマットのレポートメールを受信したら
+処理: Geminiが本文から主要数値を抽出 → スプレッドシートの該当行を更新
+変数: 抽出した数値データ
+自然言語で作るなら: "毎週届くレポートメールから数字だけ抜き出して表を更新して"
+```
+
+### 9. 未返信メールのフォローアップリマインド
+
+```text
+トリガー: 毎週月曜9時になったら
+処理: 過去1週間の未返信メールを抽出 → 本人宛にリマインドをChatで送付
+変数: 未返信メールの一覧
+自然言語で作るなら: "1週間返信していないメールがあれば、月曜の朝に教えて"
+```
+
+### 10. メルマガの要点だけ週次まとめ
+
+```text
+トリガー: 毎週金曜17時になったら
+処理: 購読中メルマガの本文を収集 → Geminiが要点だけ抽出してまとめ
+変数: 要点リストのテキスト
+自然言語で作るなら: "週に届いたメルマガの要点だけ、金曜にまとめて送って"
+```
+
+### 11. 社内問い合わせの一次切り分け
+
+```text
+トリガー: 社内問い合わせ窓口にメールが届いたら
+処理: Geminiが担当部署を推定 → 該当部署のChatスペースへ転送
+変数: 推定担当部署名
+自然言語で作るなら: "社内問い合わせは内容を見て担当部署に振り分けて"
+```
+
+### 12. 退職・異動連絡メールの自動アーカイブ
+
+```text
+トリガー: 人事から異動・退職の連絡メールが届いたら
+処理: 対象者名を抽出 → 専用フォルダにアーカイブ保存
+変数: 対象者名・異動日
+自然言語で作るなら: "異動や退職の連絡メールは、専用フォルダに自動で整理して"
+```
+
+## 会議・スケジュール
+
+### 13. 会議後の議事録自動整形
+
+```text
+トリガー: Google Meetの会議が終わったら
+処理: 自動生成メモを取得 → Geminiが出席者・議題・決定事項の形式に整形 → Googleドキュメントとして保存
+変数: 整形済み議事録テキスト
+自然言語で作るなら: "会議が終わったら、メモを議事録の形式に整えてドキュメントにして"
+```
+
+### 14. 会議メモのアクションアイテムをタスク化
+
+```text
+トリガー: 会議メモが完成したら
+処理: Geminiがアクションアイテムをリスト抽出 → 各項目を1件ずつタスク化(Repeat for each)
+変数: アクションアイテムのリスト
+自然言語で作るなら: "会議メモからやることリストを抜き出して、1つずつタスクにして"
+```
+
+### 15. 複数会議の要点を1通のダイジェストに
+
+```text
+トリガー: 毎日18時になったら
+処理: その日の全会議メモを収集 → Geminiが横断的に要点を整理
+変数: 当日の会議要点まとめ
+自然言語で作るなら: "今日あった会議の要点を1通にまとめて送って"
+```
+
+### 16. 予定調整メールから空き時間を提案
+
+```text
+トリガー: 日程調整の依頼メールが届いたら
+処理: カレンダーの空き状況を確認 → 候補日時を返信案として提示
+変数: 候補日時リスト
+自然言語で作るなら: "日程調整メールが来たら、空いている時間を返信案として出して"
+```
+
+### 17. 会議前リマインドの自動送信
+
+```text
+トリガー: 会議開始30分前になったら
+処理: 会議資料の有無を確認 → 参加者にリマインドをChatで送付
+変数: 会議名・資料リンク
+自然言語で作るなら: "会議の30分前に、資料へのリンク付きでリマインドして"
+```
+
+### 18. 週次定例の準備チェックリスト送付
+
+```text
+トリガー: 毎週の定例会議の前日になったら
+処理: 前回の議事録から未完了事項を抽出 → チェックリストとして送付
+変数: 未完了事項リスト
+自然言語で作るなら: "定例会議の前日に、前回の宿題を一覧にして送って"
+```
+
+### 19. 出張予定のカレンダー自動ブロック
+
+```text
+トリガー: 出張申請フォームに回答があったら
+処理: 出張期間を抽出 → カレンダーに時間を確保(Block time)
+変数: 出張開始日・終了日
+自然言語で作るなら: "出張申請が来たら、その期間のカレンダーを自動でブロックして"
+```
+
+### 20. 面談予約フォームからの日程確定通知
+
+```text
+トリガー: 面談予約フォームに回答があったら
+処理: 希望日時を抽出 → カレンダー登録+双方へ通知
+変数: 確定日時
+自然言語で作るなら: "面談予約が来たら、カレンダーに入れて双方に知らせて"
+```
+
+### 21. 会議室予約状況の日次サマリー
+
+```text
+トリガー: 毎朝9時になったら
+処理: 当日の会議室予約状況を取得 → 空き状況をまとめて通知
+変数: 当日の予約一覧
+自然言語で作るなら: "毎朝、今日の会議室の空き状況をまとめて教えて"
+```
+
+### 22. オンライン会議のリンク自動発行+共有
+
+```text
+トリガー: 会議依頼フォームに回答があったら
+処理: Meetリンクを発行 → 参加者へ一斉共有
+変数: 発行したMeetリンク
+自然言語で作るなら: "会議の依頼が来たら、リンクを発行して参加者に共有して"
+```
+
+### 23. 締切前タスクのカレンダー登録
+
+```text
+トリガー: 新しいタスクが作成されたら
+処理: 締切日を抽出 → カレンダーに予定として登録
+変数: タスク名・締切日
+自然言語で作るなら: "締切のあるタスクは、自動でカレンダーに入れて"
+```
+
+### 24. 休暇申請の承認フロー通知
+
+```text
+トリガー: 休暇申請フォームに回答があったら
+処理: 申請内容を要約 → 承認者のChatに通知
+変数: 申請者名・期間・理由
+自然言語で作るなら: "休暇申請が来たら、承認者にすぐ知らせて"
+```
+
+## 顧客対応・問い合わせ
+
+### 25. 問い合わせフォーム回答の種類判定
+
+```text
+トリガー: 問い合わせフォームに回答があったら
+処理: Geminiが内容を種類ごとに分類 → 対応案とあわせてChatに通知
+変数: 種類・対応案(JSON)
+自然言語で作るなら: "問い合わせが来たら、種類を判定して対応案と一緒に知らせて"
+```
+
+### 26. 緊急度別のChat通知振り分け
+
+```text
+トリガー: 問い合わせフォームに回答があったら
+処理: Geminiが緊急度を3段階で判定 → 段階に応じて通知先を出し分け
+変数: 緊急度レベル
+自然言語で作るなら: "問い合わせの緊急度を判定して、レベルに応じて通知先を変えて"
+```
+
+### 27. FAQに基づく一次回答案の自動生成
+
+```text
+トリガー: 問い合わせが届いたら
+処理: 社内FAQドキュメントを参照 → 一次回答案を下書き作成
+変数: 回答案テキスト
+自然言語で作るなら: "問い合わせにはFAQを見て、まず一次回答案を作って"
+```
+
+### 28. 対応履歴のスプレッドシート自動記録
+
+```text
+トリガー: 問い合わせに対応したら
+処理: 対応内容を要約 → 対応履歴表に1行追加
+変数: 対応日時・内容の要約
+自然言語で作るなら: "問い合わせ対応が終わったら、履歴表に記録して"
+```
+
+### 29. アンケート回答の感情分析サマリー
+
+```text
+トリガー: アンケートフォームに回答があったら
+処理: Geminiが好意的/中立/否定的を判定 → 週次でサマリー化
+変数: 感情分類の集計
+自然言語で作るなら: "アンケートの回答がポジティブかネガティブか判定して、週ごとにまとめて"
+```
+
+### 30. サポートチケットの担当割り振り提案
+
+```text
+トリガー: サポートチケットが起票されたら
+処理: 内容から適任者を推定 → 担当候補をChatで提案
+変数: 推定担当者名
+自然言語で作るなら: "サポートチケットが来たら、誰が対応すべきか提案して"
+```
+
+### 31. 契約更新前リマインドの自動送信
+
+```text
+トリガー: 契約終了日の30日前になったら
+処理: 対象契約を抽出 → 担当営業へリマインド送付
+変数: 契約先名・終了日
+自然言語で作るなら: "契約更新の30日前になったら、担当営業に知らせて"
+```
+
+### 32. 解約申請メールの即時エスカレーション
+
+```text
+トリガー: 解約に関するメールを受信したら
+処理: Geminiが解約意向を検知 → 責任者へ即時エスカレーション
+変数: 顧客名・解約理由(推定)
+自然言語で作るなら: "解約したそうなメールが来たら、すぐ責任者に伝えて"
+```
+
+### 33. 顧客からの資料請求への自動送付
+
+```text
+トリガー: 資料請求フォームに回答があったら
+処理: 該当資料をドライブから取得 → 自動返信で送付
+変数: 送付資料のリンク
+自然言語で作るなら: "資料請求が来たら、該当資料へのリンクを自動で返信して"
+```
+
+### 34. 商談後フォローメールの下書き作成
+
+```text
+トリガー: 商談メモが作成されたら
+処理: Geminiが商談内容を要約 → フォローメールの下書きを作成
+変数: 商談要約・下書き文面
+自然言語で作るなら: "商談が終わったらメモを見て、お礼メールの下書きを作って"
+```
+
+### 35. レビュー投稿の内容分類+通知
+
+```text
+トリガー: レビューフォームに回答があったら
+処理: 内容を良い点/改善点に分類 → 担当チャンネルへ通知
+変数: 分類結果
+自然言語で作るなら: "レビューが来たら、良い点と改善点に分けて担当に知らせて"
+```
+
+### 36. 問い合わせ増加日のアラート
+
+```text
+トリガー: 毎日終業時になったら
+処理: 当日の問い合わせ件数を集計 → 通常より多ければアラート通知
+変数: 当日件数・平均比
+自然言語で作るなら: "今日の問い合わせがいつもより多かったら教えて"
+```
+
+## 経理・請求
+
+### 37. 請求書PDFの金額抽出+台帳登録
+
+```text
+トリガー: 請求書フォルダにファイルが追加されたら
+処理: Geminiが金額・発行元・期日を抽出 → 経理台帳に1行追加
+変数: 抽出した請求情報(JSON)
+自然言語で作るなら: "請求書が届いたら、金額と期日を読み取って台帳に記録して"
+```
+
+### 38. 経費申請メールの内容チェック
+
+```text
+トリガー: 経費申請メールを受信したら
+処理: 申請内容が規定内か判定 → 不備があれば差し戻しコメント
+変数: 判定結果・差し戻し理由
+自然言語で作るなら: "経費申請が来たら、規定に沿っているかチェックして"
+```
+
+### 39. 支払い期限リマインドの自動送信
+
+```text
+トリガー: 支払い期限の3日前になったら
+処理: 対象の請求を抽出 → 経理担当へリマインド
+変数: 請求先名・金額・期日
+自然言語で作るなら: "支払い期限の3日前になったら、経理に知らせて"
+```
+
+### 40. 月次売上サマリーのレポート化
+
+```text
+トリガー: 毎月1日になったら
+処理: 前月の売上データを集計 → レポート形式でドキュメント化
+変数: 月次集計データ
+自然言語で作るなら: "毎月1日に、前月の売上をレポートにまとめて"
+```
+
+### 41. 領収書メールの自動仕分け
+
+```text
+トリガー: 領収書らしいメールを受信したら
+処理: Geminiが金額・支払先を抽出 → カテゴリ別フォルダに保存
+変数: 金額・支払先・カテゴリ
+自然言語で作るなら: "領収書のメールは、内容を見てカテゴリ別に整理して"
+```
+
+### 42. 見積書テンプレートへの自動転記
+
+```text
+トリガー: 見積もり内容が確定したら
+処理: 確定情報をテンプレートへ反映 → ドキュメントとして生成
+変数: 品目・金額・宛先
+自然言語で作るなら: "見積もり内容が固まったら、テンプレートに転記して見積書を作って"
+```
+
+### 43. 未払い一覧の週次通知
+
+```text
+トリガー: 毎週月曜9時になったら
+処理: 未払いの請求を抽出 → 一覧にして経理へ通知
+変数: 未払い一覧
+自然言語で作るなら: "毎週月曜に、未払いの請求一覧を経理に送って"
+```
+
+### 44. 交通費精算の一次チェック
+
+```text
+トリガー: 交通費精算フォームに回答があったら
+処理: 金額と経路の妥当性を確認 → 不自然な点があれば確認依頼
+変数: チェック結果
+自然言語で作るなら: "交通費精算が来たら、金額に不自然な点がないか確認して"
+```
+
+### 45. 契約金額の変更履歴記録
+
+```text
+トリガー: 契約書ドキュメントが更新されたら
+処理: 変更前後の金額差分を抽出 → 変更履歴表に追記
+変数: 変更前後の金額
+自然言語で作るなら: "契約金額が変わったら、変更履歴として記録して"
+```
+
+### 46. 予算超過アラートの自動検知
+
+```text
+トリガー: 予算管理シートが更新されたら
+処理: 各項目の予算消化率を計算 → 80%を超えたらアラート
+変数: 項目名・消化率
+自然言語で作るなら: "予算の消化率が8割を超えたら、すぐ教えて"
+```
+
+## 人事・総務
+
+### 47. 入社手続きチェックリストの自動送付
+
+```text
+トリガー: 入社日の1週間前になったら
+処理: 対象者の入社手続き一覧を取得 → チェックリストとして本人へ送付
+変数: 氏名・入社日・手続き一覧
+自然言語で作るなら: "入社の1週間前になったら、必要な手続きを本人に案内して"
+```
+
+### 48. 勤怠申請の不備チェック
+
+```text
+トリガー: 勤怠修正申請が届いたら
+処理: 申請内容が規定と矛盾しないか確認 → 不備があれば差し戻し
+変数: チェック結果・差し戻し理由
+自然言語で作るなら: "勤怠の修正申請が来たら、内容に不備がないか確認して"
+```
+
+### 49. 社内アンケート回答の集計サマリー
+
+```text
+トリガー: アンケートの回答期限が来たら
+処理: 全回答を集計 → 傾向をサマリー化
+変数: 集計結果
+自然言語で作るなら: "アンケートの回答が締め切られたら、結果をまとめて"
+```
+
+### 50. 備品発注依頼の一次受付
+
+```text
+トリガー: 備品発注フォームに回答があったら
+処理: 在庫・予算の確認を依頼 → 総務担当へ通知
+変数: 品目・数量・申請者
+自然言語で作るなら: "備品の発注依頼が来たら、総務に内容を伝えて"
+```
+
+### 51. 社内規定変更の周知通知
+
+```text
+トリガー: 規定ドキュメントが更新されたら
+処理: 変更点をGeminiが要約 → 全社Chatへ周知
+変数: 変更点の要約
+自然言語で作るなら: "社内規定が変わったら、変更点を要約して全社に知らせて"
+```
+
+### 52. 健康診断予約リマインド
+
+```text
+トリガー: 健康診断の予約期限が近づいたら
+処理: 未予約者を抽出 → リマインドを送付
+変数: 未予約者リスト
+自然言語で作るなら: "健康診断をまだ予約していない人に、リマインドを送って"
+```
+
+### 53. 研修申込フォームの自動振り分け
+
+```text
+トリガー: 研修申込フォームに回答があったら
+処理: 希望研修ごとに参加者を分類 → 担当講師へ共有
+変数: 研修名・参加者一覧
+自然言語で作るなら: "研修の申し込みが来たら、研修ごとに振り分けて講師に共有して"
+```
+
+### 54. 退職手続きタスクの自動生成
+
+```text
+トリガー: 退職届が受理されたら
+処理: 必要な退職手続きを洗い出し → タスクとして1件ずつ登録
+変数: 手続き項目リスト
+自然言語で作るなら: "退職が決まったら、必要な手続きをタスクにして"
+```
+
+### 55. 座席・備品管理台帳の更新
+
+```text
+トリガー: 座席異動の連絡が来たら
+処理: 異動情報を抽出 → 管理台帳を更新
+変数: 氏名・新旧座席
+自然言語で作るなら: "座席が変わったら、管理台帳を更新して"
+```
+
+### 56. 社内イベント出欠管理
+
+```text
+トリガー: イベント案内フォームに回答があったら
+処理: 出欠を集計 → 主催者へ随時共有
+変数: 出欠状況
+自然言語で作るなら: "社内イベントの出欠が来たら、主催者にリアルタイムで伝えて"
+```
+
+## 営業・CRM連携
+
+### 57. 営業リード表の行ごとにメール下書き
+
+```text
+トリガー: 週次で営業リード表を確認するタイミングになったら
+処理: 表の行を1件ずつ取得(Repeat for each) → 各リードにあわせたメール下書きを作成
+変数: リード情報(氏名/会社/状況)
+自然言語で作るなら: "リード表の行ごとに、フォローメールの下書きを作って"
+```
+
+### 58. 商談ステータス変更の通知
+
+```text
+トリガー: 商談管理シートのステータスが更新されたら
+処理: 変更内容を検知 → 関係者へChat通知
+変数: 商談名・新ステータス
+自然言語で作るなら: "商談のステータスが変わったら、関係者に知らせて"
+```
+
+### 59. 名刺データの台帳自動登録
+
+```text
+トリガー: 名刺画像がフォルダに追加されたら
+処理: Geminiが企業名・氏名・連絡先を抽出 → 名刺管理台帳に1行追加
+変数: 抽出した名刺情報(JSON)
+自然言語で作るなら: "名刺の画像を置いたら、内容を読み取って台帳に登録して"
+```
+
+### 60. 見込み客からの反応をスコアリング
+
+```text
+トリガー: メール開封・返信などの反応があったら
+処理: 反応内容から関心度を推定 → スコアを台帳に記録
+変数: 関心度スコア
+自然言語で作るなら: "見込み客の反応があったら、関心度を推定して記録して"
+```
+
+### 61. 提案書送付後のフォローアップ
+
+```text
+トリガー: 提案書を送付してから3日後になったら
+処理: 未返信であればフォローメール下書き
+変数: 送付先・提案書名
+自然言語で作るなら: "提案書を送って3日返信がなければ、フォローメールを作って"
+```
+
+### 62. 商談議事録からネクストアクション抽出
+
+```text
+トリガー: 商談議事録が作成されたら
+処理: Geminiがネクストアクションを抽出 → 担当者ごとにタスク化
+変数: アクション項目・担当者
+自然言語で作るなら: "商談議事録から次にやることを抜き出して、担当者ごとにタスクにして"
+```
+
+### 63. 週次パイプラインサマリー
+
+```text
+トリガー: 毎週金曜17時になったら
+処理: 商談管理シートを集計 → フェーズ別サマリーを作成
+変数: フェーズ別件数・金額
+自然言語で作るなら: "毎週金曜に、商談の進捗をフェーズ別にまとめて"
+```
+
+### 64. 契約書ドラフトの初稿作成
+
+```text
+トリガー: 契約条件が確定したら
+処理: 確定条件をテンプレートへ反映 → 初稿ドキュメントを生成
+変数: 契約条件(相手先/金額/期間)
+自然言語で作るなら: "契約条件が決まったら、契約書の初稿を作って"
+```
+
+### 65. 顧客別のやり取り履歴集約
+
+```text
+トリガー: 月末になったら
+処理: 該当顧客とのメール・メモを収集 → 1つのドキュメントに集約
+変数: 顧客名・やり取り履歴
+自然言語で作るなら: "月末に、顧客ごとのやり取りを1つにまとめて"
+```
+
+### 66. 失注理由の分類集計
+
+```text
+トリガー: 商談が失注ステータスになったら
+処理: 失注理由をGeminiが分類 → 月次で集計
+変数: 失注理由カテゴリ
+自然言語で作るなら: "失注した商談の理由を分類して、月ごとに集計して"
+```
+
+## ドキュメント・ナレッジ管理
+
+### 67. 議事録から社内Wiki用ページを自動生成
+
+```text
+トリガー: 議事録が確定したら
+処理: Geminiが社内Wiki形式に変換 → ナレッジベースに追加
+変数: 整形済みWikiページ
+自然言語で作るなら: "確定した議事録を、社内Wikiのページ形式にして追加して"
+```
+
+### 68. マニュアル更新の変更履歴記録
+
+```text
+トリガー: マニュアルドキュメントが更新されたら
+処理: 変更箇所を抽出 → 変更履歴表に追記
+変数: 変更箇所の要約
+自然言語で作るなら: "マニュアルが更新されたら、何が変わったか記録して"
+```
+
+### 69. NotebookLMを使った資料への質問応答フロー
+
+```text
+トリガー: 社内問い合わせがマニュアルに関するものだったら
+処理: NotebookLMのノートブックに質問 → 回答を要約して返信
+変数: NotebookLMの回答
+自然言語で作るなら: "マニュアルに関する質問が来たら、資料を根拠に回答して"
+```
+
+### 70. 社内ナレッジのカテゴリ別自動振り分け
+
+```text
+トリガー: ナレッジ投稿フォームに回答があったら
+処理: 内容からカテゴリを推定 → 該当フォルダへ保存
+変数: 推定カテゴリ
+自然言語で作るなら: "投稿されたナレッジを、内容を見てカテゴリごとに整理して"
+```
+
+### 71. ドキュメントの体裁統一チェック
+
+```text
+トリガー: ドキュメントが共有されたら
+処理: 社内フォーマットとの差分を確認 → 修正提案をコメント
+変数: 体裁の差分箇所
+自然言語で作るなら: "共有されたドキュメントが、社内フォーマットに沿っているか確認して"
+```
+
+### 72. 古い資料の棚卸しリスト作成
+
+```text
+トリガー: 四半期の初めになったら
+処理: 更新が半年以上ないファイルを抽出 → 棚卸しリストとして通知
+変数: 対象ファイル一覧
+自然言語で作るなら: "半年以上更新のない資料を、棚卸しリストにして教えて"
+```
+
+### 73. 複数資料の要点を1枚に集約
+
+```text
+トリガー: 関連資料が複数指定されたら
+処理: 各資料の要点をGeminiが抽出 → 1枚のサマリーに統合
+変数: 統合サマリー
+自然言語で作るなら: "この資料たちの要点を、1枚にまとめて"
+```
+
+### 74. 用語集の自動更新
+
+```text
+トリガー: 新しい社内用語が投稿されたら
+処理: 定義をGeminiが整形 → 用語集ドキュメントに追記
+変数: 用語・定義
+自然言語で作るなら: "新しい用語が投稿されたら、用語集に追加して"
+```
+
+### 75. 資料レビュー依頼の自動配信
+
+```text
+トリガー: レビュー依頼フォームに回答があったら
+処理: 対象資料へのリンクを取得 → レビュアーへ配信
+変数: 資料リンク・依頼者名
+自然言語で作るなら: "資料のレビュー依頼が来たら、レビュアーに配信して"
+```
+
+### 76. 版数管理台帳の自動更新
+
+```text
+トリガー: ドキュメントが新しいバージョンで保存されたら
+処理: 版数と更新日を検知 → 版数管理台帳に追記
+変数: 版数・更新日
+自然言語で作るなら: "ドキュメントが更新されたら、版数管理表に記録して"
+```
+
+## チーム連携・通知
+
+### 77. 毎朝のニュース見出し要約配信
+
+```text
+トリガー: 毎朝8時になったら
+処理: 業界ニュースを収集 → Geminiが見出しだけ要約
+変数: 見出し要約リスト
+自然言語で作るなら: "毎朝8時に、業界ニュースの見出しだけまとめて送って"
+```
+
+### 78. チーム全体への進捗ダイジェスト
+
+```text
+トリガー: 毎週金曜の終業時になったら
+処理: 各タスクの進捗を集計 → ダイジェストとして配信
+変数: 進捗サマリー
+自然言語で作るなら: "毎週金曜に、チームの進捗をまとめて配信して"
+```
+
+### 79. Slack/Chat横断の重要トピック抽出
+
+```text
+トリガー: 1日の終わりになったら
+処理: その日のChatメッセージを収集 → 重要そうな話題だけ抽出
+変数: 重要トピックの要約
+自然言語で作るなら: "今日のChatで話題になった重要な件だけ、まとめて教えて"
+```
+
+### 80. タスク遅延の自動アラート
+
+```text
+トリガー: タスクの締切が過ぎたら
+処理: 遅延タスクを検知 → 担当者へアラート通知
+変数: タスク名・遅延日数
+自然言語で作るなら: "締切を過ぎたタスクがあれば、担当者にすぐ知らせて"
+```
+
+### 81. 新規メンバーへのオンボーディング案内
+
+```text
+トリガー: 新規メンバーが追加されたら
+処理: オンボーディング資料一式を取得 → 案内メッセージとして送付
+変数: 資料リンク一覧
+自然言語で作るなら: "新しいメンバーが増えたら、オンボーディング案内を送って"
+```
+
+### 82. 週報の自動リマインド+集約
+
+```text
+トリガー: 毎週金曜15時になったら
+処理: 未提出者にリマインド → 提出済みの週報を1つに集約
+変数: 週報の要約集
+自然言語で作るなら: "週報を出していない人にリマインドして、出ている分はまとめて"
+```
+
+### 83. プロジェクト完了時の関係者通知
+
+```text
+トリガー: プロジェクトのステータスが完了になったら
+処理: 関係者リストを取得 → 完了報告を一斉送付
+変数: プロジェクト名・完了日
+自然言語で作るなら: "プロジェクトが完了したら、関係者全員に報告して"
+```
+
+### 84. 社内表彰・お知らせの自動配信
+
+```text
+トリガー: 表彰・お知らせフォームに入力があったら
+処理: 内容を整形 → 全社Chatへ配信
+変数: お知らせ本文
+自然言語で作るなら: "表彰やお知らせが登録されたら、全社に配信して"
+```
+
+### 85. 障害・トラブル発生時の一斉通知
+
+```text
+トリガー: 障害報告フォームに回答があったら
+処理: 内容を要約 → 関係チャンネルへ一斉通知
+変数: 障害内容・影響範囲
+自然言語で作るなら: "障害の報告が来たら、内容を要約して関係者に知らせて"
+```
+
+### 86. 定例会議の議題事前収集
+
+```text
+トリガー: 定例会議の2日前になったら
+処理: 議題募集フォームへの誘導を送付 → 集まった議題を一覧化
+変数: 議題リスト
+自然言語で作るなら: "定例会議の2日前に、議題を募集してまとめて"
+```
+
+## 個人生産性
+
+### 87. 1日の未読メール概要取得
+
+```text
+トリガー: 毎日夜になったら
+処理: その日の未読メールを取得 → 概要をChat通知
+変数: 未読メール概要
+自然言語で作るなら: "毎日夜に、その日の未読メールの概要を教えて"
+```
+
+### 88. フォロー必要メールへのスター付与
+
+```text
+トリガー: メールを受信したら
+処理: フォローが必要そうか判定 → 該当メールにスターを付与
+変数: 要フォローフラグ
+自然言語で作るなら: "対応が必要そうなメールに、自動でスターを付けて"
+```
+
+### 89. 朝の予定+天気+ニュースまとめ配信
+
+```text
+トリガー: 毎朝7時になったら
+処理: 当日の予定・天気・主要ニュースを収集 → 1通にまとめて配信
+変数: 当日の統合サマリー
+自然言語で作るなら: "毎朝7時に、今日の予定と天気とニュースを1通にまとめて"
+```
+
+### 90. To Doリストの自動整理
+
+```text
+トリガー: 毎朝になったら
+処理: Google ToDoの項目を優先度順に並べ替え → 上位項目を通知
+変数: 優先度付きTo Doリスト
+自然言語で作るなら: "毎朝、今日やることを優先順位順に並べて教えて"
+```
+
+### 91. 資料下書きの叩き台作成
+
+```text
+トリガー: 資料作成の依頼を受けたら
+処理: 要件をGeminiに伝える → 叩き台ドキュメントを生成
+変数: 資料の構成案
+自然言語で作るなら: "この内容で、資料の叩き台を作って"
+```
+
+### 92. 週次の振り返りメモ自動生成
+
+```text
+トリガー: 毎週金曜の終業時になったら
+処理: その週のタスク完了状況を集計 → 振り返りメモを作成
+変数: 週次振り返りテキスト
+自然言語で作るなら: "今週やったことを振り返って、メモにまとめて"
+```
+
+### 93. 名刺画像からの連絡先登録
+
+```text
+トリガー: 名刺画像を指定フォルダに置いたら
+処理: Geminiが情報を抽出 → 連絡先として登録
+変数: 氏名・会社・連絡先
+自然言語で作るなら: "名刺の写真を置いたら、連絡先として登録して"
+```
+
+### 94. 長文メールの3行要約
+
+```text
+トリガー: 長いメールを受信したら
+処理: 本文をGeminiが3行に要約
+変数: 3行要約テキスト
+自然言語で作るなら: "長いメールが来たら、3行に要約して"
+```
+
+### 95. 複数ソースからの情報収集ダイジェスト
+
+```text
+トリガー: 指定した情報源が更新されたら
+処理: 各ソースの更新内容を収集 → 1通のダイジェストに統合
+変数: 統合ダイジェスト
+自然言語で作るなら: "登録した情報源が更新されたら、まとめて教えて"
+```
+
+### 96. スプレッドシートのデータ行を1件ずつメール送信
+
+```text
+トリガー: 対象シートを確認するタイミングになったら
+処理: 行を1件ずつ取得(Repeat for each) → 各行の宛先にメール送信
+変数: 行データ(宛先/本文情報)
+自然言語で作るなら: "この表の行ごとに、宛先へメールを送って"
+```
+
+### 97. 定型業務のチェックリスト化
+
+```text
+トリガー: 繰り返しの多い作業を洗い出すとき
+処理: 過去の作業ログから頻出パターンを抽出 → チェックリスト化して保存
+変数: 作業手順リスト
+自然言語で作るなら: "よくやる作業を、チェックリストにまとめて"
+```
+
+### 98. 資料の翻訳下書き作成
+
+```text
+トリガー: 英語資料の翻訳依頼が来たら
+処理: Geminiが日本語訳の下書きを作成
+変数: 翻訳下書きテキスト
+自然言語で作るなら: "この資料を、日本語に訳した下書きを作って"
+```
+
+### 99. 会議アジェンダのテンプレート生成
+
+```text
+トリガー: 新しい定例会議を設定するとき
+処理: 過去の議事録から典型的な項目を抽出 → アジェンダテンプレートを作成
+変数: アジェンダ項目リスト
+自然言語で作るなら: "この定例会議用の、アジェンダテンプレートを作って"
+```
+
+### 100. 月末振り返りレポートの自動作成
+
+```text
+トリガー: 毎月末になったら
+処理: その月の主要な出来事・数字を収集 → レポート形式でまとめる
+変数: 月次レポート本文
+自然言語で作るなら: "月末に、今月の振り返りレポートを作って"
+```
+
+---
+
+以上、100個です。内訳: メール管理12個 / 会議・スケジュール12個 / 顧客対応・問い合わせ12個 / 経理・請求10個 / 人事・総務10個 / 営業・CRM連携10個 / ドキュメント・ナレッジ管理10個 / チーム連携・通知10個 / 個人生産性14個
+</pre>
+<footer>AIエージェント/Kawaru ｜ このプレゼントは自由に使ってください</footer>
+<script>
+function copyTextWithFallback(text){
+  function fb(){try{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+    const ok=document.execCommand('copy');ta.remove();return ok;}catch(e){return false;}}
+  if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(text).then(()=>true).catch(fb);}
+  return Promise.resolve(fb());
+}
+function showCopyResult(btn,ok){const o=btn.dataset.o||btn.textContent;btn.dataset.o=o;
+  btn.textContent=ok?'✔ コピーしました':'✖ コピー不可 → ⬇をご利用ください';setTimeout(()=>{btn.textContent=o;},ok?1600:3200);}
+async function copyPrompt(id,btn){const ok=await copyTextWithFallback(document.getElementById(id).textContent);showCopyResult(btn,ok);}
+function downloadText(id,fn,btn){try{const t=document.getElementById(id).textContent;const b=new Blob([t],{type:'text/plain;charset=utf-8'});
+  const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(u),2000);}catch(e){if(btn){const o=btn.textContent;btn.textContent='✖ 保存不可';setTimeout(()=>{btn.textContent=o;},3000);}}}
+</script></div></body></html>
